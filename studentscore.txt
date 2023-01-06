@@ -1,0 +1,44 @@
+import sklearn as s
+s.__version__
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+data=pd.read_csv("C:/Users/CSE WPT/Downloads/archive(18)/Student_Marks.csv")
+data
+
+data.head()
+
+data.shape
+
+data.isnull().sum()
+
+plt.scatter(x=data.time_study,y=data.Marks)
+plt.title("Student data")
+plt.xlabel("time_study")
+plt.ylabel("Marks")
+plt.show()
+
+data.mean()
+
+data=data.fillna(data.mean())
+data.isnull().sum()
+
+X=data.drop(columns='Marks')
+y=data.drop(columns='time_study')
+X.shape,y.shape
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=53)
+
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(X_train,y_train)
+
+model.score(X_test,y_test)
+
+model.intercept_
+
+pred=model.predict(X_test)
+pred
+
